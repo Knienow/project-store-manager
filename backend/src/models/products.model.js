@@ -13,6 +13,7 @@ const findAllProducts = async () => {
 
 // função para buscar por ID
 const findProductById = async (productId) => {
+    // desestruturando o retorno da função connection.execute em dois níveis - o primeiro retorna o array com as linhas encontradas (array com um elemento ou arraz vazio)    
     const [[product]] = await connection.execute(
       'SELECT * FROM products WHERE id = ?',
       [productId],
@@ -20,8 +21,16 @@ const findProductById = async (productId) => {
     return product;
     // return camelize(product);
 };
+
+// const removeProduct = async (id) => {
+//   await connection.execute(
+//     'DELETE FROM products WHERE id = ?',
+//     [id],
+//   );
+// };
   
 module.exports = {
     findAllProducts,
     findProductById,
+    // removeProduct,
 };
