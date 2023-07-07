@@ -10,7 +10,7 @@ const connection = require('../../../src/models/connection');
 const { salesFromDB, saleByIdFromModel } = require('../mocks/sales.mock');
 
 describe('Realizando testes - SALE MODEL:', function () {   
-    afterEach(function () {
+    beforeEach(function () {
         sinon.restore();
     });
     it('Recuperando todas as vendas com sucesso', async function () {
@@ -20,7 +20,7 @@ describe('Realizando testes - SALE MODEL:', function () {
         expect(sales).to.be.deep.equal(salesFromDB);
     });
     it('Recuperando uma venda por ID com sucesso', async function () {
-        sinon.stub(connection, 'execute').resolves([[saleByIdFromModel]]);
+        sinon.stub(connection, 'execute').resolves([saleByIdFromModel]);
         const sale = await salesModel.findSaleById();
         expect(sale).to.be.an('array');
         expect(sale).to.be.deep.equal(saleByIdFromModel);

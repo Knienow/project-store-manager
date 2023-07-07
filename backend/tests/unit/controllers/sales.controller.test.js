@@ -10,7 +10,7 @@ const { salesController } = require('../../../src/controllers');
 const { salesFromDB, saleByIdFromModel, resServiceSuccessful } = require('../mocks/sales.mock');
 
 describe('Realizando testes - SALE CONTROLLER:', function () {   
-    afterEach(function () {
+    beforeEach(function () {
         sinon.restore();
     });
     it('Recuperando todas as vendas com sucesso', async function () {
