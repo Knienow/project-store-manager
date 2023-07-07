@@ -1,13 +1,16 @@
-const salesModel = require('../models/sales.model');
+const { salesModel } = require('../models');
 
-const getAllsales = async () => {
-  const sales = await salesModel.findAllsales();
-  return sales;
+const getAllSales = async () => {
+  const sales = await salesModel.findAllSales();
+  return { status: 'SUCCESSFUL', data: sales };
 };
 
-const getSaleByID = async () => {
-    const salesId = await salesModel.findSaleById();
-    return salesId;
+const getSaleByID = async (id) => {
+    const salesId = await salesModel.findSaleById(id);
+    if (!salesId) {
+      return { status: 'NOT_FOUND', data: { message: 'Sale not found' } };
+    }
+    return { status: 'SUCCESSFUL', data: salesId };
 };
 
 // const deletSale = async () => {
@@ -16,7 +19,7 @@ const getSaleByID = async () => {
 // };
 
 module.exports = {
-  getAllsales,
+  getAllSales,
   getSaleByID,
 //   deletSale,
 };
