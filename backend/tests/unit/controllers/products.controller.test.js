@@ -35,4 +35,16 @@ describe('Realizando testes - PRODUCT CONTROLLER:', function () {
         expect(res.status).to.have.been.calledWith(200);
         expect(res.json).to.have.been.calledWith(productByIdFromModel);
     });
+    // só colei e troquei a descrição
+    // it('Cadastrando um produto com sucesso', async function () {
+    //     sinon.stub(productsService, 'getProductByID').resolves(resServiceSuccessful);
+    //     const req = { params: { id: 1 } };
+    //     const res = {
+    //         status: sinon.stub().returnsThis(),
+    //         json: sinon.stub(),
+    //     };
+    //     await productsController.getProductId(req, res);
+    //     expect(res.status).to.have.been.calledWith(200);
+    //     expect(res.json).to.have.been.calledWith(productByIdFromModel);
+    // });
 });

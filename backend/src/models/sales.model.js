@@ -30,15 +30,15 @@ const findSaleById = async (saleId) => {
     // return camelize(sale);
 };
 
-// const removeSale = async (id) => {
-//   await connection.execute(
-//     'DELETE FROM sales WHERE id = ?',
-//     [id],
-//   );
-// };
+const removeSale = async (id) => {
+  await connection.execute(
+    'DELETE FROM sales WHERE id = ?',
+    [id],
+  );
+};
 
 module.exports = {
     findAllSales,
     findSaleById,
-    // removeSale,
+    removeSale,
 };

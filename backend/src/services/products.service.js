@@ -13,6 +13,13 @@ const getProductByID = async (id) => {
     return { status: 'SUCCESSFUL', data: productsId };
 };
 
+// apenas comecei
+const postProduct = async (name) => {
+  const product = await productsModel.createProduct(name);
+  return { status: 'CREATED', data: product };
+};
+
+// apenas comecei
 // const deletProduct = async () => {
 //     const product = await productsModel.removeProduct();
 //     return product;
@@ -21,5 +28,6 @@ const getProductByID = async (id) => {
 module.exports = {
   getAllProducts,
   getProductByID,
+  postProduct,
 //   deletProduct,
 };

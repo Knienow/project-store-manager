@@ -17,6 +17,15 @@ const productByIdFromModel = {
     name: 'Martelo de Thor',
 };
 
+const productPost = {
+  name: 'ProdutoX',
+};
+
+const productCreated = {
+  id: 4,
+  name: 'ProdutoX',
+};
+
 const resServiceSuccessful = {
   status: 'SUCCESSFUL',
   data: productByIdFromModel,
@@ -30,6 +39,8 @@ const resServiceNotFound = {
 module.exports = {
     productsFromDB,
     productByIdFromModel,
+    productPost,
+    productCreated,
     resServiceSuccessful,
     resServiceNotFound,
 };

@@ -13,13 +13,21 @@ const getSaleByID = async (id) => {
     return { status: 'SUCCESSFUL', data: salesId };
 };
 
-// const deletSale = async () => {
-//     const sale = await salesModel.removeSale();
-//     return sale;
-// };
+// apenas comecei
+const postSale = async () => {
+  const sales = await salesModel.findAllSales();
+  return { status: 'SUCCESSFUL', data: sales };
+};
+
+// apenas comecei
+const deletSale = async (id) => {
+    const sale = await salesModel.removeSale(id);
+    return sale;
+};
 
 module.exports = {
   getAllSales,
   getSaleByID,
-//   deletSale,
+  postSale,
+  deletSale,
 };
