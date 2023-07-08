@@ -30,6 +30,15 @@ const findSaleById = async (saleId) => {
     // return camelize(sale);
 };
 
+// apenas iniciei - verificar como inserir os dados nas duas tabelas 
+const createSale = async (productId, quantity) => {
+  const [{ saleId }] = await connection.execute(
+    'INSERT INTO products (productId, quantity) VALUE (?, ?);',
+    [productId, quantity],
+  );
+  return { id: saleId };
+};
+
 const removeSale = async (id) => {
   await connection.execute(
     'DELETE FROM sales WHERE id = ?',
@@ -40,5 +49,6 @@ const removeSale = async (id) => {
 module.exports = {
     findAllSales,
     findSaleById,
+    createSale,
     removeSale,
 };

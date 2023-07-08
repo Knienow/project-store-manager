@@ -12,8 +12,16 @@ const getSales = async (req, res) => {
         const { status, data } = await salesService.getSaleByID(id);
         return res.status(mapStatusHTTP(status)).json(data);
     };
+
+    // verificar se model e service estão ok - desenvolver os testes 
+    const createSale = async (req, res) => {
+      const { productId, quantity } = req.body;
+      const { status, data } = await salesService.postSale(productId, quantity);
+      return res.status(mapStatusHTTP(status)).json(data);
+  };
     
     module.exports = {
       getSales,
       getSaleId,
+      createSale,
     };
