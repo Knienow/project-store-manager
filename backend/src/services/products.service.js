@@ -25,12 +25,20 @@ const postProduct = async (name) => {
   return { status: 'CREATED', data: product };
 };
 
-const updateProd = async (product) => {
-  const updatedProducts = await productsModel.upProduct(product);
-  if (updatedProducts.affectedRows === 1) {
-    return updatedProducts;
+const updateProd = async (id, name) => {
+  const updatedProducts = await productsModel.findProductById(id);
+  if (!updatedProducts) {
+    return { status: 'NOT_FOUND', data: { message: 'Product not found' } };
   }
-  return { error: true, message: 'Something went wrong', status: 400 };
+  if (!name) {
+    return { status: 'BAD_REQUEST', data: { message: '"name" is required' } };
+  }
+  if (name.length < 5) {
+    return { status: 'INVALID_VALUE', 
+    data: { message: '"name" length must be at least 5 characters long' } };
+  }
+  const product = await productsModel.upProduct(id, name);
+  return { status: 'SUCCESSFUL', data: product };
 };
 
 // apenas comecei

@@ -27,12 +27,12 @@ const createProduct = async (name) => {
   return { id: insertId, name };
 };
 
-const upProduct = async (product) => {
-  const [{ affectedRows }] = await connection.execute(
+const upProduct = async (id, name) => {
+  await connection.execute(
     'UPDATE products SET name=? WHERE id=?',
-    [product.name, product.id],
+    [name, id],
   );
-  return { affectedRows };
+  return { id, name };
 };
 
 const removeProduct = async (id) => {
