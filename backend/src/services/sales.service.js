@@ -15,7 +15,7 @@ const getSaleByID = async (id) => {
 
 const postSale = async (saleObject) => {
   const newSaleId = await salesModel.createSale(saleObject);
-  return newSaleId;
+  return { status: 'SUCCESSFUL', data: newSaleId };
 };
 
 // apenas comecei

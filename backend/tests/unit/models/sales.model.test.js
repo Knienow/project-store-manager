@@ -7,7 +7,7 @@ chai.use(sinonChai);
 
 const { salesModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
-const { salesFromDB, saleByIdFromModel, postModel } = require('../mocks/sales.mock');
+const { salesFromDB, saleByIdFromModel, postModel, returnPost } = require('../mocks/sales.mock');
 
 describe('Realizando testes - SALE MODEL:', function () {   
     afterEach(function () {
@@ -28,11 +28,11 @@ describe('Realizando testes - SALE MODEL:', function () {
     it('Cadastrando a venda de um produto com sucesso', async function () {
         sinon.stub(connection, 'execute')
         .onFirstCall()       
-        .resolves([{ insertId: 2 }])
+        .resolves([{ insertId: 3 }])
         .onSecondCall()
         .resolves();
         const sale = await salesModel.createSale(postModel);
-        expect(sale).to.equal(2);
+        expect(sale).to.deep.equal(returnPost);
    });
 
    // testar caso de falha no cadastro da venda - aumentar cobertura de mutations 

@@ -13,9 +13,9 @@ const getSales = async (req, res) => {
 
     const createSale = async (req, res) => {
       const sale = req.body;
-      const id = await salesService.postSale(sale);
-      if (!id) return res.status(404).json({ message: 'error' });
-      return res.status(201).json({ id, itemsSold: sale });
+      const { status, data } = await salesService.postSale(sale);
+      console.log(status, data);
+      res.status(status === 'SUCCESSFUL' ? 201 : 404).json(data);
   };
     
     module.exports = {

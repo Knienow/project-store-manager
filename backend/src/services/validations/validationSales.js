@@ -45,20 +45,21 @@ const validateSalesIds = async (req, res, next) => {
     if (!verifyId) {
       return res.status(404).json({ message: 'Product not found' });
     }
-    next();
+    return next();
   }; 
   
   const validateSalesQuantity = (req, res, next) => {
     const sales = req.body;
     for (let i = 0; i < sales.length; i += 1) {
       if (sales[i].quantity <= 0) {
+        console.log('sales', sales[i].quantity);
         return res.status(422).json({ message: '"quantity" must be greater than or equal to 1' });
       }
       if (!sales[i].quantity) {
         return res.status(400).json({ message: '"quantity" is required' });
       }
-      next();
     }
+    return next();
   };
 
 module.exports = {

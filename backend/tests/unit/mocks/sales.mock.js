@@ -63,6 +63,20 @@ const returnPost = {
   ],
 };
 
+const invalidTest = {
+  id: 60,
+  itemsSold: [
+    {
+      productId: '',
+      quantity: 0,
+    },
+    {
+      productId: 2,
+      quantity: 5,
+    },
+  ],
+};
+
 module.exports = {
   salesFromDB,
   saleByIdFromModel,
@@ -71,4 +85,5 @@ module.exports = {
   postModel,
   returnPost,
   messageErrorNotFound,
+  invalidTest,
 };

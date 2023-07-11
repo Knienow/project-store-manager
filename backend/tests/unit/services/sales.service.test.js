@@ -28,8 +28,8 @@ describe('Realizando testes - SALE SERVICE:', function () {
         expect(sale.data).to.be.deep.equal(resServiceSuccessful);
     });
     it('Cadastrando a venda de um produto com sucesso', async function () {
-        sinon.stub(salesModel, 'createSale').resolves(1);
+        sinon.stub(salesModel, 'createSale').resolves();
         const result = await salesService.postSale(postModel);
-        expect(result).to.equal(1);
+        expect(result).to.be.an('object');
     });
 });

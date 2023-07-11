@@ -33,7 +33,7 @@ const resServiceSuccessful = {
 
 const resServiceNotFound = {
   status: 'NOT_FOUND',
-  data: { message: 'message' },
+  data: { message: 'Product not found' },
 };
 
 const updatedProduct = { affectedRows: 1 };

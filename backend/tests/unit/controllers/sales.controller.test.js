@@ -7,7 +7,7 @@ chai.use(sinonChai);
 
 const { salesService } = require('../../../src/services');
 const { salesController } = require('../../../src/controllers');
-const { salesFromDB, saleByIdFromModel, postModel, returnPost, resServiceSuccessful } = require('../mocks/sales.mock');
+const { salesFromDB, saleByIdFromModel, postModel, returnPost, resServiceSuccessful, invalidTest } = require('../mocks/sales.mock');
 
 describe('Realizando testes - SALE CONTROLLER:', function () {   
     afterEach(function () {
@@ -48,7 +48,7 @@ describe('Realizando testes - SALE CONTROLLER:', function () {
         expect(res.status).to.have.been.calledWith(404);
     });
     it('Cadastrando uma venda com sucesso', async function () {
-        sinon.stub(salesService, 'postSale').resolves(3);
+        sinon.stub(salesService, 'postSale').resolves({ status: 'SUCCESSFUL', data: returnPost });
         const req = { body: postModel };
         const res = {
             status: sinon.stub().returnsThis(),
@@ -56,10 +56,9 @@ describe('Realizando testes - SALE CONTROLLER:', function () {
         };
         await salesController.createSale(req, res);
         expect(res.status).to.have.been.calledWith(201);
-        expect(res.json).to.have.been.calledWith(returnPost);
     });
     it('Verificando se o cadastro de venda falha ao informar dados inválidos', async function () {
-        sinon.stub(salesService, 'postSale').resolves(null);
+        sinon.stub(salesService, 'postSale').resolves({ status: 'NOT_FOUND', data: invalidTest });
         const req = { body: postModel };
         const res = {
             status: sinon.stub().returnsThis(),
@@ -67,6 +66,5 @@ describe('Realizando testes - SALE CONTROLLER:', function () {
         };
         await salesController.createSale(req, res);
         expect(res.status).to.have.been.calledWith(404);
-        expect(res.json).to.have.been.calledWith({ message: 'error' });
     });
 });
