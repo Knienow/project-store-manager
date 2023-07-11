@@ -1,4 +1,3 @@
-// const camelize = require('camelize');
 const connection = require('./connection');
 
 const findAllSales = async () => {
@@ -8,35 +7,42 @@ const findAllSales = async () => {
     + 'FROM sales INNER JOIN sales_products ' 
     + 'ON sales.id = sales_products.sale_id '
     + 'ORDER BY id ASC;',
-    // 'SELECT * FROM StoreManager.sales'
   );
   return sales;
-//   return camelize(sales); 
 };
 
-// função para buscar por ID
 const findSaleById = async (saleId) => {
-    const [sale] = await connection.execute(
-      'SELECT sales.date, sales_products.product_id AS productId, '
-      + 'sales_products.quantity '
-      + 'FROM sales_products '
-      + 'INNER JOIN sales '
-      + 'ON sales_products.sale_id = sales.id '
-      + 'WHERE sale_id = ? '
-      + 'ORDER BY id ASC;',
-      [saleId],
-    );
-    return sale;
-    // return camelize(sale);
+  const [sale] = await connection.execute(
+    'SELECT sales.date, sales_products.product_id AS productId, '
+    + 'sales_products.quantity '
+    + 'FROM sales_products '
+    + 'INNER JOIN sales '
+    + 'ON sales_products.sale_id = sales.id '
+    + 'WHERE sale_id = ? '
+    + 'ORDER BY id ASC;',
+    [saleId],
+  );
+  return sale;
 };
 
-// apenas iniciei - verificar como inserir os dados nas duas tabelas 
-const createSale = async (productId, quantity) => {
-  const [{ saleId }] = await connection.execute(
-    'INSERT INTO products (productId, quantity) VALUE (?, ?);',
-    [productId, quantity],
+const createSaleProducts = async (elem, saleId) => { 
+  await connection.execute(
+      'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?,?,?)',
+      [saleId, elem.productId, elem.quantity],
+    );
+};
+
+const createSale = async (sale) => {
+  const [result] = await connection.execute(
+    'INSERT INTO sales (date) VALUES (NOW());',
   );
-  return { id: saleId };
+  const idSale = result.insertId;
+  const mapSales = sale.map(async (elem) => {
+    await createSaleProducts(elem, idSale);
+  });
+
+  await Promise.all(mapSales);
+  return idSale; 
 };
 
 const removeSale = async (id) => {

@@ -18,12 +18,12 @@ const productByIdFromModel = {
 };
 
 const productPost = {
-  name: 'ProdutoX',
+  name: 'Caneta galactica',
 };
 
 const productCreated = {
-  id: 4,
-  name: 'ProdutoX',
+  id: 3,
+  name: 'Caneta galactica',
 };
 
 const resServiceSuccessful = {
@@ -36,6 +36,12 @@ const resServiceNotFound = {
   data: { message: 'message' },
 };
 
+const updatedProduct = { affectedRows: 1 };
+
+const registredProduct = { insertId: 3, affectedRows: 1 };
+
+const registredProductFail = { insertId: 3, affectedRows: 1 };
+
 module.exports = {
     productsFromDB,
     productByIdFromModel,
@@ -43,4 +49,7 @@ module.exports = {
     productCreated,
     resServiceSuccessful,
     resServiceNotFound,
+    updatedProduct,
+    registredProduct,
+    registredProductFail,
 };

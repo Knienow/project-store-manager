@@ -9,7 +9,6 @@ const findAllProducts = async () => {
   return products;
 };
 
-// função para buscar por ID
 const findProductById = async (productId) => {
     // desestruturando o retorno da função connection.execute em dois níveis 
     // o primeiro retorna o array com as linhas encontradas (array com um elemento ou arraz vazio)    
@@ -20,23 +19,13 @@ const findProductById = async (productId) => {
     return product;
 };
 
-// função para cadastro de produto
 const createProduct = async (name) => {
   const [{ insertId }] = await connection.execute(
-    'INSERT INTO products (name) VALUE (?);',
+    'INSERT INTO products (name) VALUES (?);',
     [name],
   );
   return { id: insertId, name };
 };
-
-// EXEMPLO COURSE - ANALISAR
-// const insert = async (driver) => {
-//   const columns = getFormattedColumnNames(driver);
-//   const placeholders = getFormattedPlaceholders(driver);
-//   const query = `INSERT INTO drivers (${columns}) VALUE (${placeholders});`;
-//   const [{ insertId }] = await connection.execute(query, [...Object.values(driver)]);
-//   return insertId;
-// };
 
 // apenas comecei
 // const removeProduct = async (id) => {

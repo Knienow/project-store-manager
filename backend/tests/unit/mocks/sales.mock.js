@@ -36,9 +36,39 @@ status: 'NOT_FOUND',
 data: { message: 'message' },
 };
 
+const messageErrorNotFound = { message: 'Sale not found' };
+
+const postModel = [
+  {
+    productId: 1,
+    quantity: 1,
+  },
+  {
+    productId: 2,
+    quantity: 5,
+  },
+];
+
+const returnPost = {
+  id: 3,
+  itemsSold: [
+    {
+      productId: 1,
+      quantity: 1,
+    },
+    {
+      productId: 2,
+      quantity: 5,
+    },
+  ],
+};
+
 module.exports = {
   salesFromDB,
   saleByIdFromModel,
   resServiceSuccessful,
   resServiceNotFound,
+  postModel,
+  returnPost,
+  messageErrorNotFound,
 };

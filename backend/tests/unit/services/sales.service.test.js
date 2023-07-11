@@ -7,7 +7,7 @@ chai.use(sinonChai);
 
 const { salesModel } = require('../../../src/models');
 const { salesService } = require('../../../src/services');
-const { salesFromDB, resServiceSuccessful } = require('../mocks/sales.mock');
+const { salesFromDB, resServiceSuccessful, postModel } = require('../mocks/sales.mock');
 
 describe('Realizando testes - SALE SERVICE:', function () {   
     beforeEach(function () {
@@ -26,5 +26,10 @@ describe('Realizando testes - SALE SERVICE:', function () {
         expect(sale).to.be.an('object');
         expect(sale.status).to.be.equal('SUCCESSFUL');
         expect(sale.data).to.be.deep.equal(resServiceSuccessful);
+    });
+    it('Cadastrando a venda de um produto com sucesso', async function () {
+        sinon.stub(salesModel, 'createSale').resolves(1);
+        const result = await salesService.postSale(postModel);
+        expect(result).to.equal(1);
     });
 });

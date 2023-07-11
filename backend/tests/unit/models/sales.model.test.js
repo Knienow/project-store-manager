@@ -7,10 +7,10 @@ chai.use(sinonChai);
 
 const { salesModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
-const { salesFromDB, saleByIdFromModel } = require('../mocks/sales.mock');
+const { salesFromDB, saleByIdFromModel, postModel } = require('../mocks/sales.mock');
 
 describe('Realizando testes - SALE MODEL:', function () {   
-    beforeEach(function () {
+    afterEach(function () {
         sinon.restore();
     });
     it('Recuperando todas as vendas com sucesso', async function () {
@@ -25,4 +25,13 @@ describe('Realizando testes - SALE MODEL:', function () {
         expect(sale).to.be.an('array');
         expect(sale).to.be.deep.equal(saleByIdFromModel);
     });
+    it('Cadastrando a venda de um produto com sucesso', async function () {
+        sinon.stub(connection, 'execute')
+        .onFirstCall()       
+        .resolves([{ insertId: 2 }])
+        .onSecondCall()
+        .resolves();
+        const sale = await salesModel.createSale(postModel);
+        expect(sale).to.equal(2);
+   });
 });

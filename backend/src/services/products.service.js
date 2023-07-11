@@ -13,7 +13,6 @@ const getProductByID = async (id) => {
     return { status: 'SUCCESSFUL', data: productsId };
 };
 
-// apenas comecei
 const postProduct = async (name) => {
   if (!name) {
     return { status: 'BAD_REQUEST', data: { message: '"name" is required' } };
@@ -27,6 +26,12 @@ const postProduct = async (name) => {
 };
 
 // apenas comecei
+// const updateProduct = async (id, name) => {
+//   const updatedProducts = await productsModel.updateProduct(id, name);
+//   return updatedProducts;
+// };
+
+// apenas comecei
 // const deletProduct = async () => {
 //     const product = await productsModel.removeProduct();
 //     return product;
@@ -36,5 +41,6 @@ module.exports = {
   getAllProducts,
   getProductByID,
   postProduct,
+  // updateProduct,
 //   deletProduct,
 };
