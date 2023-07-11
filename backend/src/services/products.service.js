@@ -25,11 +25,13 @@ const postProduct = async (name) => {
   return { status: 'CREATED', data: product };
 };
 
-// apenas comecei
-// const updateProduct = async (id, name) => {
-//   const updatedProducts = await productsModel.updateProduct(id, name);
-//   return updatedProducts;
-// };
+const updateProd = async (product) => {
+  const updatedProducts = await productsModel.upProduct(product);
+  if (updatedProducts.affectedRows === 1) {
+    return updatedProducts;
+  }
+  return { error: true, message: 'Something went wrong', status: 400 };
+};
 
 // apenas comecei
 // const deletProduct = async () => {
@@ -41,6 +43,6 @@ module.exports = {
   getAllProducts,
   getProductByID,
   postProduct,
-  // updateProduct,
+  updateProd,
 //   deletProduct,
 };

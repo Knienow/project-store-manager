@@ -27,17 +27,25 @@ const createProduct = async (name) => {
   return { id: insertId, name };
 };
 
-// apenas comecei
-// const removeProduct = async (id) => {
-//   await connection.execute(
-//     'DELETE FROM products WHERE id = ?',
-//     [id],
-//   );
-// };
+const upProduct = async (product) => {
+  const [{ affectedRows }] = await connection.execute(
+    'UPDATE products SET name=? WHERE id=?',
+    [product.name, product.id],
+  );
+  return { affectedRows };
+};
+
+const removeProduct = async (id) => {
+  await connection.execute(
+    'DELETE FROM products WHERE id = ?',
+    [id],
+  );
+};
   
 module.exports = {
     findAllProducts,
     findProductById,
     createProduct,
-    // removeProduct,
+    upProduct,
+    removeProduct,
 };
