@@ -34,4 +34,6 @@ describe('Realizando testes - SALE MODEL:', function () {
         const sale = await salesModel.createSale(postModel);
         expect(sale).to.equal(2);
    });
+
+   // testar caso de falha no cadastro da venda - aumentar cobertura de mutations 
 });

@@ -35,19 +35,18 @@ describe('Realizando testes - SALE CONTROLLER:', function () {
         expect(res.status).to.have.been.calledWith(200);
         expect(res.json).to.have.been.calledWith(saleByIdFromModel);
     });
-    // // problema nessa verificação - retorna 200 e deveria retornar 404
-    // it('Verificando se a busca falha ao informar um id inválido', async function () {
-    //     const req = {};
-    //     const res = {};
+    it('Verificando se a busca falha ao informar um id inválido', async function () {
+        const req = {};
+        const res = {};
        
-    //     req.params = { id: 100 };
-    //     req.body = {};
-    //     res.status = sinon.stub().returns(res);
-    //     res.json = sinon.stub().returns(messageErrorNotFound);
-    //     sinon.stub(salesService, 'getSaleByID').resolves(messageErrorNotFound);
-    //     await salesController.getSaleId(req, res);
-    //     expect(res.status).to.have.been.calledWith(404);
-    // });
+        req.params = { id: 100 };
+        req.body = {};
+        res.status = sinon.stub().returns(res);
+        res.json = sinon.stub().returns();
+        sinon.stub(salesService, 'getSaleByID').resolves({ status: 'NOT_FOUND', data: { message: 'Sale not found' } });
+        await salesController.getSaleId(req, res);
+        expect(res.status).to.have.been.calledWith(404);
+    });
     it('Cadastrando uma venda com sucesso', async function () {
         sinon.stub(salesService, 'postSale').resolves(3);
         const req = { body: postModel };

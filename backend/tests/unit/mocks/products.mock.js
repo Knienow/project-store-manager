@@ -42,6 +42,13 @@ const registredProduct = { insertId: 3, affectedRows: 1 };
 
 const registredProductFail = { insertId: 3, affectedRows: 1 };
 
+const result = {
+  id: 3,
+  name: {
+    name: 'Caneta galactica',
+  },
+};
+
 module.exports = {
     productsFromDB,
     productByIdFromModel,
@@ -52,4 +59,5 @@ module.exports = {
     updatedProduct,
     registredProduct,
     registredProductFail,
+    result,
 };

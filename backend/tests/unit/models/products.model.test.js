@@ -8,7 +8,7 @@ chai.use(sinonChai);
 const { productsModel } = require('../../../src/models');
 const connection = require('../../../src/models/connection');
 // const { productsFromDB, productByIdFromModel, productPost, productCreated } = require('../mocks/products.mock');
-const { productsFromDB, productByIdFromModel } = require('../mocks/products.mock');
+const { productsFromDB, productByIdFromModel, productPost, result } = require('../mocks/products.mock');
 
 describe('Realizando testes - PRODUCT MODEL:', function () {   
     afterEach(function () {
@@ -26,11 +26,14 @@ describe('Realizando testes - PRODUCT MODEL:', function () {
         expect(product).to.be.an('object');
         expect(product).to.be.deep.equal(productByIdFromModel);
     });
-    // iniciei
-    // it('Cadastrando um produto com sucesso', async function () {
-    //     sinon.stub(connection, 'execute').resolves([productsFromDB]);
-    //     const product = await productsModel.createProduct(productPost);
-    //     expect(product).to.be.an('object');
-    //     expect(product).to.be.deep.equal(productCreated);
-    // });
+    it('Cadastrando um produto com sucesso', async function () {
+        sinon.stub(connection, 'execute')
+        .onFirstCall()       
+        .resolves([{ insertId: 3 }])
+        .onSecondCall()
+        .resolves();
+        const product = await productsModel.createProduct(productPost);
+        expect(product).to.be.deep.equal(result);
+    });
+    // testar caso de falha no cadastro do produto - aumentar cobertura de mutations
 });
