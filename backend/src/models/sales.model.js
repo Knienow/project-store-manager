@@ -38,16 +38,16 @@ const createSale = async (sale) => {
   return { id: idSale, itemsSold: sale }; 
 };
 
-const removeSale = async (id) => {
-  await connection.execute(
-    'DELETE FROM sales WHERE id = ?',
-    [id],
-  );
-};
+// const removeSale = async (id) => {
+//   await connection.execute(
+//     'DELETE FROM sales WHERE id = ?',
+//     [id],
+//   );
+// };
 
 module.exports = {
     findAllSales,
     findSaleById,
     createSale,
-    removeSale,
+    // removeSale,
 };

@@ -1,4 +1,4 @@
-const connection = require('../../models/connection');
+const connection = require('../models/connection');
 
 const getValidId = async () => {
   const [validId] = await connection.execute(
@@ -13,7 +13,7 @@ const getValidId = async () => {
 
 const validateProductsData = (req, res, next) => {
     const { name } = req.body;
-    if (name.length === 0) {
+    if (!name) {
       return res.status(400).json({ message: '"name" is required' });
     }
     if (name.length < 5) {

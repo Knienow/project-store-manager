@@ -19,14 +19,14 @@ const postSale = async (saleObject) => {
 };
 
 // apenas comecei
-const deletSale = async (id) => {
-    const sale = await salesModel.removeSale(id);
-    return sale;
-};
+// const deletSale = async (id) => {
+//     const sale = await salesModel.removeSale(id);
+//     return sale;
+// };
 
 module.exports = {
   getAllSales,
   getSaleByID,
   postSale,
-  deletSale,
+  // deletSale,
 };

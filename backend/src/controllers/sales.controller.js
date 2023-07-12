@@ -14,7 +14,6 @@ const getSales = async (req, res) => {
     const createSale = async (req, res) => {
       const sale = req.body;
       const { status, data } = await salesService.postSale(sale);
-      console.log(status, data);
       res.status(status === 'SUCCESSFUL' ? 201 : 404).json(data);
   };
     

@@ -26,6 +26,11 @@ const productCreated = {
   name: 'Caneta galactica',
 };
 
+const productUpdateFail1 = {
+  id: '',
+  name: 'Caneta galactica',
+};
+
 const resServiceSuccessful = {
   status: 'SUCCESSFUL',
   data: productByIdFromModel,
@@ -60,4 +65,5 @@ module.exports = {
     registredProduct,
     registredProductFail,
     result,
+    productUpdateFail1,
 };

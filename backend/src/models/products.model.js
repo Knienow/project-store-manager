@@ -35,17 +35,17 @@ const upProduct = async (id, name) => {
   return { id, name };
 };
 
-const removeProduct = async (id) => {
-  await connection.execute(
-    'DELETE FROM products WHERE id = ?',
-    [id],
-  );
-};
+// const removeProduct = async (id) => {
+//   await connection.execute(
+//     'DELETE FROM products WHERE id = ?',
+//     [id],
+//   );
+// };
   
 module.exports = {
     findAllProducts,
     findProductById,
     createProduct,
     upProduct,
-    removeProduct,
+    // removeProduct,
 };

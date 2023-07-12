@@ -13,6 +13,11 @@ describe('Realizando testes - SALE MODEL:', function () {
     afterEach(function () {
         sinon.restore();
     });
+    it('Recuperando todas as vendas sem sucesso - sem vendas cadastradas', async function () {
+        sinon.stub(connection, 'execute').resolves([[], []]);
+        const sales = await salesModel.findAllSales();
+        expect(sales).to.be.an('array');
+    });
     it('Recuperando todas as vendas com sucesso', async function () {
         sinon.stub(connection, 'execute').resolves([salesFromDB]);
         const sales = await salesModel.findAllSales();
@@ -24,6 +29,12 @@ describe('Realizando testes - SALE MODEL:', function () {
         const sale = await salesModel.findSaleById();
         expect(sale).to.be.an('array');
         expect(sale).to.be.deep.equal(saleByIdFromModel);
+    });
+    it('Recuperando uma venda por ID sem sucesso - id inexistente', async function () {
+        sinon.stub(connection, 'execute').resolves([{ productId: '' }]);
+        const sale = await salesModel.findSaleById('');
+        expect(sale).to.be.an('object');
+        // expect(sale).to.be.deep.equal({ status: 400, message: '"productId" is required' });
     });
     it('Cadastrando a venda de um produto com sucesso', async function () {
         sinon.stub(connection, 'execute')

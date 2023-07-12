@@ -1,6 +1,6 @@
-const connection = require('../../models/connection');
+const connection = require('../models/connection');
 const { getValidId } = require('./validationProducts');
-const { getAllProducts } = require('../products.service');
+const { getAllProducts } = require('../services/products.service');
 
 const getValidIdSales = async () => {
   const [validId] = await connection.execute(
@@ -30,7 +30,7 @@ const validateSalesIds = async (req, res, next) => {
       return res.status(404).json({ message: 'Product not found' });
     }
   
-    next();
+    return next();
   };
 
   const validateAllProductId = async (req, res, next) => {
@@ -48,7 +48,7 @@ const validateSalesIds = async (req, res, next) => {
     return next();
   }; 
   
-  const validateSalesQuantity = (req, res, next) => {
+  const validateQuantity = (req, res, next) => {
     const sales = req.body;
     for (let i = 0; i < sales.length; i += 1) {
       if (sales[i].quantity <= 0) {
@@ -66,5 +66,5 @@ module.exports = {
   getValidIdSales,
   validateSalesIds, 
   validateAllProductId,
-  validateSalesQuantity,
+  validateQuantity,
 };
