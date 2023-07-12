@@ -35,5 +35,14 @@ describe('Realizando testes - PRODUCT MODEL:', function () {
         const product = await productsModel.createProduct(productPost);
         expect(product).to.be.deep.equal(result);
     });
-    // testar caso de falha no cadastro do produto - aumentar cobertura de mutations
+    it('Atualizando um produto com sucesso', async function () {
+        sinon.stub(connection, 'execute')
+        .onFirstCall()       
+        .resolves([{ insertId: 1 }])
+        .onSecondCall()
+        .resolves();
+        const product = await productsModel.upProduct(1, 'Martelo do Coringa');
+        expect(product).to.be.an('object');
+        expect(product).to.be.deep.equal({ id: 1, name: 'Martelo do Coringa' });
+    });
 });

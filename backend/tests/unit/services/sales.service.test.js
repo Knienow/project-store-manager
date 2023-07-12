@@ -10,7 +10,7 @@ const { salesService } = require('../../../src/services');
 const { salesFromDB, resServiceSuccessful, postModel } = require('../mocks/sales.mock');
 
 describe('Realizando testes - SALE SERVICE:', function () {   
-    beforeEach(function () {
+    afterEach(function () {
         sinon.restore();
     });
     it('Recuperando todas as vendas com sucesso', async function () {
